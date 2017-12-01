@@ -2,14 +2,9 @@ $(() => {
   const $messagesNode = $('#messages');
   const $messageFormNode = $('#message-form');
 
-  $(document).ajaxSuccess(function(...args) {
-    console.log(args);
-  });
-
   function getMessages() {
     $.get('/messages')
       .done((data) => {
-        console.log(data);
         $messagesNode.html(data.map(msg => `<li>${msg.message}</li>`).join(''));
       })
       .fail(() => {
@@ -25,7 +20,6 @@ $(() => {
       contentType: 'application/json',
     })
       .done((response) => {
-        console.log(response);
         getMessages();
       })
       .fail(() => {
