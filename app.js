@@ -6,7 +6,7 @@ const app = express();
 app.use(express.static('public'));
 app.use(express.json());
 
-app.get('/messages', (req, res) => res.send('Hello World!'));
+app.get('/messages', messageController.getMessages);
 
 app.post('/messages', messageController.createMessage);
 
