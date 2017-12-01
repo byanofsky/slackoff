@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+}
+
+#chat-module {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+#message-form-wrapper {
+  background: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+#message-form {
+  display: flex;
+}
+
+#message-input {
+  width: 100%;
+}
+
+#submit-button {
+  margin-left: auto;
+  width: 100px;
+  height: 30px;
+}
