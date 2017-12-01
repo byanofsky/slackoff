@@ -7,6 +7,7 @@ $(() => {
   const socket = io();
   const $messagesNode = $('#messages');
   const $messageFormNode = $('#message-form');
+  const $messageFormWrapper = $('#message-form-wrapper');
 
   function getMessages() {
     $.get('/messages')
@@ -60,4 +61,7 @@ $(() => {
   socket.on('exception', error => console.error(error));
 
   $messageFormNode.submit(handleSubmit);
+
+  // Set messages height
+  $messagesNode.css('paddingBottom', $messageFormWrapper.height());
 });

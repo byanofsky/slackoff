@@ -1,12 +1,12 @@
-body {
-  margin: 0;
-}
-
 #chat-module {
   display: flex;
   flex-direction: column;
   height: 100%;
   width: 100%;
+}
+
+#messages {
+  overflow-y: scroll;
 }
 
 #message-form-wrapper {
@@ -21,11 +21,16 @@ body {
 }
 
 #message-input {
+  border: 1px solid black;
+  padding: 10px;
   width: 100%;
 }
 
 #submit-button {
+  background: blue;
+  border-radius: 0;
+  border: none;
   margin-left: auto;
+  cursor: pointer;
   width: 100px;
-  height: 30px;
 }
