@@ -43,6 +43,8 @@ $(() => {
     };
     // sendMessage(msgObj);
     sendMessageIO(msgObj);
+    // Reset message field
+    $(this.message).val('');
     return false;
   }
 
