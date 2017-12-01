@@ -5,7 +5,8 @@ $(() => {
   function getMessages() {
     $.get('/messages')
       .done((data) => {
-        $messagesNode.html(data.map(msg => `<li>${msg.message}</li>`).join(''));
+        $messagesNode.html(data.map(msg => `<li>${msg.message}<footer>${msg.author}</footer></li>`)
+          .join(''));
       })
       .fail(() => {
         console.log('Failed to get messages');
