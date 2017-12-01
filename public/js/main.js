@@ -1,4 +1,5 @@
 $(() => {
+  const socket = io();
   const $messagesNode = $('#messages');
   const $messageFormNode = $('#message-form');
 
