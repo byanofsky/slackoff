@@ -1,4 +1,9 @@
 $(() => {
+  let user = window.localStorage.getItem('user');
+  if (!user) {
+    user = window.prompt('What is your name?', 'anon');
+    window.localStorage.setItem('user', user);
+  }
   const socket = io();
   const $messagesNode = $('#messages');
   const $messageFormNode = $('#message-form');
@@ -34,7 +39,7 @@ $(() => {
   function handleSubmit() {
     const msgObj = {
       message: this.message.value,
-      user: this.user.value,
+      user,
     };
     // sendMessage(msgObj);
     sendMessageIO(msgObj);
