@@ -8,6 +8,8 @@ const app = express();
 const http = httpPre.Server(app);
 const io = socketIO(http);
 
+const PORT = process.env.PORT || 3000
+
 app.use(express.static('public'));
 app.use(express.json());
 
@@ -25,4 +27,4 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => console.log('user disconnected'));
 });
 
-http.listen(3000, () => console.log('Example app listening on port 3000!'));
+http.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
