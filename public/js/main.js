@@ -28,15 +28,29 @@ $(() => {
         console.log('Failed to get messages');
       });
   }
-  function handleSubmit(event) {
-    sendMessage({
+  function sendMessageIO(msgObj) {
+    socket.emit('new message', JSON.stringify(msgObj));
+  }
+  function handleSubmit() {
+    const msgObj = {
       message: this.message.value,
       user: this.user.value,
-    });
+    };
+    // sendMessage(msgObj);
+    sendMessageIO(msgObj);
     return false;
   }
 
-  $messageFormNode.submit(handleSubmit);
+  socket.on('new message', (msgObjStr) => {
+    const msgObj = JSON.parse(msgObjStr);
+    $messagesNode.append($('<li>').html(`${msgObj.message}<footer>${msgObj.user}</footer>`));
+  });
+  socket.on('all messages', (messagesJSON) => {
+    const messages = JSON.parse(messagesJSON);
+    $messagesNode.html(messages.map(msg => `<li>${msg.message}<footer>${msg.user}</footer></li>`)
+      .join(''));
+  });
+  socket.on('exception', error => console.error(error));
 
-  getMessages();
+  $messageFormNode.submit(handleSubmit);
 });
