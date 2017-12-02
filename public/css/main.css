@@ -1,6 +1,11 @@
 body {
+  font-family: 'Open Sans', sans-serif;
   height: 100vh;
   overflow: hidden;
+}
+
+* {
+  font-family: 'Open Sans', sans-serif;
 }
 
 #chat-module {
@@ -10,12 +15,17 @@ body {
   width: 100%;
 }
 
-#messages {
+#messages-wrapper {
   height: 100%;
-  list-style: none;
   overflow-y: scroll;
-  margin: 0;
-  padding: 0 0 40px;
+  width: 100%;
+  margin: 0 0 60px;
+}
+
+#messages {
+  list-style: none;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 #messages li {
@@ -24,30 +34,37 @@ body {
 }
 
 #messages .message {
+  border: 5px lightgrey solid;
+  border-radius: 5px;
   display: block;
   margin: 10px;
+  max-width: 300px;
   padding: 10px;
   width: 70%;
 }
 
+#messages .message footer {
+  text-align: right;
+}
+
 #messages li[data-sent="-2"] .message {
-  background: red;
+  border-color: red;
 }
 
 #messages li[data-sent="-1"] .message {
-  background: pink;
+  border-color: pink;
 }
 
 #messages li[data-sent="0"] .message {
-  background: grey;
+  border-color: grey;
 }
 
 #messages li[data-sent="1"] .message {
-  background: lightgreen;
+  border-color: lightgreen;
 }
 
 #messages li[data-sent="2"] .message {
-  background: green;
+  border-color: green;
 }
 
 #messages li[data-me="true"] {
@@ -66,16 +83,17 @@ body {
 }
 
 #message-input {
-  border: 1px solid black;
-  padding: 10px;
+  border: 1px solid #EEE;
+  padding: 20px;
   width: 100%;
 }
 
 #submit-button {
-  background: blue;
+  background: #33C3F0;
   border-radius: 0;
   border: none;
+  color: white;
   margin-left: auto;
   cursor: pointer;
-  width: 100px;
+  width: 150px;
 }

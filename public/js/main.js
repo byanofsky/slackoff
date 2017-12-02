@@ -6,6 +6,7 @@ $(() => {
   }
   const socket = io();
   const $messagesNode = $('#messages');
+  const $messagesWrapperNode = $('#messages-wrapper');
   const $messageFormNode = $('#message-form');
   const $messageFormWrapper = $('#message-form-wrapper');
 
@@ -49,7 +50,7 @@ $(() => {
     return false;
   }
   function scrollMessages() {
-    $messagesNode.animate({ scrollTop: $messagesNode.prop('scrollHeight') });
+    $messagesWrapperNode.animate({ scrollTop: $messagesWrapperNode.prop('scrollHeight') });
   }
   function formatMessage(msg) {
     let sentiment = 0;
@@ -67,11 +68,7 @@ $(() => {
     return `
       <li data-sent="${sentiment}" data-me="${msg.user === user}">
         <div class="message">
-          ${msg.message}
-          <br>
-          Comparative: ${msg.sentComp}
-          <br>
-          Score: ${msg.sentScore}
+          <main>${msg.message}</main>
           <footer>${msg.user}</footer>
         </div>
       </li>
