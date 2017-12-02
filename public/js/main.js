@@ -51,16 +51,25 @@ $(() => {
   function scrollMessages() {
     $messagesNode.animate({ scrollTop: $messagesNode.prop('scrollHeight') });
   }
+  function formatMessage(msg) {
+    return `
+      <li data-me="${msg.user === user}">
+        <div class="message">
+          ${msg.message}
+          <footer>${msg.user}</footer></li>
+        </div>
+      </li>
+    `;
+  }
 
   socket.on('new message', (msgObjStr) => {
     const msgObj = JSON.parse(msgObjStr);
-    $messagesNode.append($('<li>').html(`${msgObj.message}<footer>${msgObj.user}</footer>`));
+    $messagesNode.append($(formatMessage(msgObj)));
     scrollMessages();
   });
   socket.on('all messages', (messagesJSON) => {
     const messages = JSON.parse(messagesJSON);
-    $messagesNode.html(messages.map(msg => `<li>${msg.message}<footer>${msg.user}</footer></li>`)
-      .join(''));
+    $messagesNode.html(messages.map(formatMessage).join(''));
     scrollMessages();
   });
   socket.on('exception', error => console.error(error));

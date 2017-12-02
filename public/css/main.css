@@ -11,7 +11,31 @@ body {
 
 #messages {
   height: 100%;
+  list-style: none;
   overflow-y: scroll;
+  margin: 0;
+  padding: 0;
+}
+
+#messages li {
+  display: flex;
+  width: 100%;
+}
+
+#messages .message {
+  background: lightgrey;
+  display: block;
+  margin: 10px;
+  padding: 10px;
+  width: 70%;
+}
+
+#messages li[data-me="true"] {
+  flex-direction: row-reverse;
+}
+
+#messages li[data-me="true"] .message {
+  background: lightblue;
 }
 
 #message-form-wrapper {
