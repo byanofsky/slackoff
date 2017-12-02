@@ -1,4 +1,5 @@
 import io from 'socket.io-client';
+import $ from 'jquery';
 import React, { Component } from 'react';
 import MessageWrapper from './MessageWrapper';
 import FormWrapper from './FormWrapper';
@@ -10,6 +11,11 @@ function getUser() {
     window.localStorage.setItem('user', user);
   }
 }
+
+function scrollMessages() {
+  $('html, body').animate({ scrollTop: $('html').height() - $(window).height() }, 'fast');
+}
+
 
 class App extends Component {
   constructor(props) {
@@ -35,12 +41,12 @@ class App extends Component {
         const newState = prevState.messages.concat([message]);
         return { messages: newState };
       });
-      // scrollMessages();
+      scrollMessages();
     });
     this.socket.on('all messages', (allMessagesJSON) => {
       const messages = JSON.parse(allMessagesJSON);
-      // scrollMessages();
       this.setState(() => ({ messages }));
+      scrollMessages();
     });
     this.socket.on('exception', error => console.error(error));
   }
@@ -66,8 +72,8 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <MessageWrapper messages={this.state.messages} />
+      <div id="chat-module">
+        <MessageWrapper messages={this.state.messages} user={this.state.user} />
         <FormWrapper messageValue={this.state.messageValue} submitHandler={this.handleSubmit} changeHandler={this.handleChange} />
       </div>
     );
