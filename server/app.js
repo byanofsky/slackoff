@@ -11,8 +11,7 @@ const io = socketIO(http);
 
 const PORT = process.env.PORT || 3000;
 
-console.log(path.join(__dirname, 'public'));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, './../client/dist')));
 app.use(express.json());
 
 app.get('/messages', messageController.getMessages);
