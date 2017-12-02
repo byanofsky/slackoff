@@ -5,7 +5,7 @@ function ActiveUsers(props) {
 
   return (
     <div id="active-users">
-      {activeUsers}
+      <strong>Active Users:</strong> {activeUsers}
     </div>
   );
 }

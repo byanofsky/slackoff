@@ -3,7 +3,6 @@ import $ from 'jquery';
 import React, { Component } from 'react';
 import MessageWrapper from './MessageWrapper';
 import FormWrapper from './FormWrapper';
-import ActiveUsers from './ActiveUsers';
 
 function getUser() {
   let user = window.localStorage.getItem('user');
@@ -85,9 +84,8 @@ class App extends Component {
   render() {
     return (
       <div id="chat-module">
-        <ActiveUsers activeUsers={this.state.activeUsers} />
         <MessageWrapper messages={this.state.messages} user={this.state.user} />
-        <FormWrapper messageValue={this.state.messageValue} submitHandler={this.handleSubmit} changeHandler={this.handleChange} />
+        <FormWrapper messageValue={this.state.messageValue} activeUsers={this.state.activeUsers} submitHandler={this.handleSubmit} changeHandler={this.handleChange} />
       </div>
     );
   }
