@@ -1,7 +1,6 @@
 body {
   font-family: 'Open Sans', sans-serif;
-  height: 100vh;
-  overflow: hidden;
+  /*height: 100vh;*/
 }
 
 * {
@@ -17,7 +16,6 @@ body {
 
 #messages-wrapper {
   height: 100%;
-  overflow-y: scroll;
   width: 100%;
   margin: 0 0 60px;
 }
