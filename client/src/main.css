@@ -7,6 +7,12 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+#active-users {
+  position: fixed;
+  background: white;
+  height: 20px;
+}
+
 #chat-module {
   display: flex;
   flex-direction: column;

@@ -3,6 +3,7 @@ import $ from 'jquery';
 import React, { Component } from 'react';
 import MessageWrapper from './MessageWrapper';
 import FormWrapper from './FormWrapper';
+import ActiveUsers from './ActiveUsers';
 
 function getUser() {
   let user = window.localStorage.getItem('user');
@@ -10,6 +11,7 @@ function getUser() {
     user = window.prompt('What is your name?', 'anon');
     window.localStorage.setItem('user', user);
   }
+  return user;
 }
 
 function scrollMessages() {
@@ -27,6 +29,7 @@ class App extends Component {
       messages: [],
       messageValue: '',
       user: getUser(),
+      activeUsers: [],
     };
 
     this.sendMessage = this.sendMessage.bind(this);
@@ -48,6 +51,11 @@ class App extends Component {
       this.setState(() => ({ messages }));
       scrollMessages();
     });
+    this.socket.on('active users', (activeUsersJSON) => {
+      const activeUsers = JSON.parse(activeUsersJSON);
+      this.updateActiveUsers(activeUsers);
+    });
+    this.socket.on('get user', () => this.socket.emit('user', this.state.user));
     this.socket.on('exception', error => console.error(error));
   }
 
@@ -70,9 +78,14 @@ class App extends Component {
     this.setState({ messageValue: event.target.value });
   }
 
+  updateActiveUsers(activeUsers) {
+    this.setState({ activeUsers: activeUsers });
+  }
+
   render() {
     return (
       <div id="chat-module">
+        <ActiveUsers activeUsers={this.state.activeUsers} />
         <MessageWrapper messages={this.state.messages} user={this.state.user} />
         <FormWrapper messageValue={this.state.messageValue} submitHandler={this.handleSubmit} changeHandler={this.handleChange} />
       </div>
