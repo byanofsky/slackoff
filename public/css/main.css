@@ -1,3 +1,7 @@
+body {
+  height: 100vh;
+}
+
 #chat-module {
   display: flex;
   flex-direction: column;
@@ -6,13 +10,12 @@
 }
 
 #messages {
+  height: 100%;
   overflow-y: scroll;
 }
 
 #message-form-wrapper {
   background: white;
-  position: fixed;
-  bottom: 0;
   width: 100%;
 }
 

@@ -48,20 +48,22 @@ $(() => {
     $(this.message).val('');
     return false;
   }
+  function scrollMessages() {
+    $messagesNode.animate({ scrollTop: $messagesNode.prop('scrollHeight') });
+  }
 
   socket.on('new message', (msgObjStr) => {
     const msgObj = JSON.parse(msgObjStr);
     $messagesNode.append($('<li>').html(`${msgObj.message}<footer>${msgObj.user}</footer>`));
+    scrollMessages();
   });
   socket.on('all messages', (messagesJSON) => {
     const messages = JSON.parse(messagesJSON);
     $messagesNode.html(messages.map(msg => `<li>${msg.message}<footer>${msg.user}</footer></li>`)
       .join(''));
+    scrollMessages();
   });
   socket.on('exception', error => console.error(error));
 
   $messageFormNode.submit(handleSubmit);
-
-  // Set messages height
-  $messagesNode.css('paddingBottom', $messageFormWrapper.height());
 });
