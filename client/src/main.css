@@ -107,3 +107,12 @@ body {
   background: grey;
   cursor: wait;
 }
+
+#sent-score {
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  background: #33C3F0;
+}

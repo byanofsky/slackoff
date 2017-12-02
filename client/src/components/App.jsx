@@ -3,6 +3,7 @@ import $ from 'jquery';
 import React, { Component } from 'react';
 import MessageWrapper from './MessageWrapper';
 import FormWrapper from './FormWrapper';
+import SentScore from './SentScore';
 import blockedTerms from './../blockedTerms';
 
 function getUser() {
@@ -31,6 +32,7 @@ class App extends Component {
       user: getUser(),
       activeUsers: [],
       valid: true,
+      sentScore: 0,
     };
 
     this.sendMessage = this.sendMessage.bind(this);
@@ -52,9 +54,16 @@ class App extends Component {
       this.setState(() => ({ messages }));
       scrollMessages();
     });
+    this.socket.on('sent score', (sentScore) => {
+      console.log(sentScore);
+      this.setState(() => ({ sentScore }));
+    });
     this.socket.on('active users', (activeUsersJSON) => {
       const activeUsers = JSON.parse(activeUsersJSON);
       this.updateActiveUsers(activeUsers);
+    });
+    this.socket.on('sentScore', (sentScore) => {
+      this.setState(() => ({ sentScore: Number(sentScore) }));
     });
     this.socket.on('get user', () => this.socket.emit('user', this.state.user));
     this.socket.on('exception', error => console.error(error));
@@ -93,6 +102,7 @@ class App extends Component {
   render() {
     return (
       <div id="chat-module">
+        <SentScore sentScore={this.state.sentScore} />
         <MessageWrapper messages={this.state.messages} user={this.state.user} />
         <FormWrapper valid={this.state.valid} messageValue={this.state.messageValue} activeUsers={this.state.activeUsers} submitHandler={this.handleSubmit} changeHandler={this.handleChange} />
       </div>
