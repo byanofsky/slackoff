@@ -61,7 +61,7 @@ $(() => {
       sentiment = '0';
     } else if (msg.sentScore < 2) {
       sentiment = '1';
-    } else {
+    } else if (msg.sentScore >= 2) {
       sentiment = '2';
     }
     return `
