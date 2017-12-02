@@ -68,7 +68,7 @@ $(() => {
     return `
       <li data-sent="${sentiment}" data-me="${msg.user === user}">
         <div class="message">
-          <main>${msg.message}</main>
+          ${msg.message}
           <footer>${msg.user} at ${new Date(msg.created).toLocaleTimeString()}</footer>
         </div>
       </li>
