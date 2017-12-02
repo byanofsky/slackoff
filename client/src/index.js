@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import socket from 'socket.io-client';
+import io from 'socket.io-client';
 import './main.css';
 import './normalize.css';
 
