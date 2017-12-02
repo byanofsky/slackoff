@@ -6,7 +6,9 @@ const socketIO = require('socket.io');
 const messageController = require('./controllers/messageController');
 
 const app = express();
-const http = httpPre.Server(app);
+const http = httpPre.Server(app, {
+  serveClient: false,
+});
 const io = socketIO(http);
 
 const PORT = process.env.PORT || 3000;
