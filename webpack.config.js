@@ -13,9 +13,12 @@ module.exports = {
       '/socket.io': 'http://localhost:3000/socket.io',
     },
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+  },
   module: {
     rules: [
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
+      { test: /\.jsx?$/, exclude: /node_modules/, loader: 'babel-loader' },
       {
         test: /\.css$/,
         use: [
