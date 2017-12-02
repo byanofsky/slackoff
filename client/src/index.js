@@ -1,5 +1,7 @@
 import $ from 'jquery';
 import socket from 'socket.io-client';
+import './main.css';
+import './normalize.css';
 
 $(() => {
   let user = window.localStorage.getItem('user');
