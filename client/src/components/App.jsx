@@ -3,6 +3,7 @@ import $ from 'jquery';
 import React, { Component } from 'react';
 import MessageWrapper from './MessageWrapper';
 import FormWrapper from './FormWrapper';
+import jsTerms from './../jsTerms';
 
 function getUser() {
   let user = window.localStorage.getItem('user');
@@ -29,6 +30,7 @@ class App extends Component {
       messageValue: '',
       user: getUser(),
       activeUsers: [],
+      valid: true,
     };
 
     this.sendMessage = this.sendMessage.bind(this);
@@ -58,6 +60,15 @@ class App extends Component {
     this.socket.on('exception', error => console.error(error));
   }
 
+  componentDidUpdate() {
+    console.log(this.state.messageValue.split(/\s/));
+    const newValid = !this.state.messageValue
+      .split(/\s/)
+      .some(term => jsTerms[term.toLowerCase()]);
+    console.log(newValid);
+    if (newValid !== this.state.valid) this.setState({ valid: newValid });
+  }
+
   sendMessage(messageData) {
     this.socket.emit('new message', JSON.stringify(messageData));
   }
@@ -85,7 +96,7 @@ class App extends Component {
     return (
       <div id="chat-module">
         <MessageWrapper messages={this.state.messages} user={this.state.user} />
-        <FormWrapper messageValue={this.state.messageValue} activeUsers={this.state.activeUsers} submitHandler={this.handleSubmit} changeHandler={this.handleChange} />
+        <FormWrapper valid={this.state.valid} messageValue={this.state.messageValue} activeUsers={this.state.activeUsers} submitHandler={this.handleSubmit} changeHandler={this.handleChange} />
       </div>
     );
   }
