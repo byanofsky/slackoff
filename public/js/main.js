@@ -52,7 +52,7 @@ $(() => {
     $messagesNode.animate({ scrollTop: $messagesNode.prop('scrollHeight') });
   }
   function formatMessage(msg) {
-    let sentiment;
+    let sentiment = 0;
     if (msg.sentScore < -2) {
       sentiment = '-2';
     } else if (msg.sentScore < -1) {
