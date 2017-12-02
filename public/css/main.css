@@ -15,7 +15,7 @@ body {
   list-style: none;
   overflow-y: scroll;
   margin: 0;
-  padding: 0;
+  padding: 0 0 40px;
 }
 
 #messages li {
@@ -41,6 +41,8 @@ body {
 
 #message-form-wrapper {
   background: white;
+  position: fixed;
+  bottom: 0;
   width: 100%;
 }
 
