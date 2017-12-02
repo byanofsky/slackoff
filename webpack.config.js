@@ -9,6 +9,9 @@ module.exports = {
   devtool: 'eval-source-map',
   devServer: {
     contentBase: './client/dist',
+    proxy: {
+      '/socket.io': 'http://localhost:3000/socket.io',
+    },
   },
   module: {
     rules: [
