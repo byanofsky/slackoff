@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const httpPre = require('http');
+const path = require('path');
 const socketIO = require('socket.io');
 const messageController = require('./controllers/messageController');
 
@@ -8,9 +9,10 @@ const app = express();
 const http = httpPre.Server(app);
 const io = socketIO(http);
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000;
 
-app.use(express.static('public'));
+console.log(path.join(__dirname, 'public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
 app.get('/messages', messageController.getMessages);
@@ -27,4 +29,4 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => console.log('user disconnected'));
 });
 
-http.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+http.listen(PORT, () => console.log(`SlackOff listening on port ${PORT}!`));
