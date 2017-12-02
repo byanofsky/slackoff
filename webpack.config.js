@@ -7,6 +7,9 @@ module.exports = {
     path: path.resolve(__dirname, './client/dist'),
   },
   devtool: 'eval-source-map',
+  devServer: {
+    contentBase: './client/dist',
+  },
   module: {
     rules: [
       {
