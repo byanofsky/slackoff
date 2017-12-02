@@ -3,7 +3,7 @@ import $ from 'jquery';
 import React, { Component } from 'react';
 import MessageWrapper from './MessageWrapper';
 import FormWrapper from './FormWrapper';
-import jsTerms from './../jsTerms';
+import blockedTerms from './../blockedTerms';
 
 function getUser() {
   let user = window.localStorage.getItem('user');
@@ -61,11 +61,9 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    console.log(this.state.messageValue.split(/\s/));
     const newValid = !this.state.messageValue
-      .split(/\s/)
-      .some(term => jsTerms[term.toLowerCase()]);
-    console.log(newValid);
+      .split(/\b/)
+      .some(term => blockedTerms[term.toLowerCase()]);
     if (newValid !== this.state.valid) this.setState({ valid: newValid });
   }
 
