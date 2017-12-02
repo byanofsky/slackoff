@@ -52,11 +52,27 @@ $(() => {
     $messagesNode.animate({ scrollTop: $messagesNode.prop('scrollHeight') });
   }
   function formatMessage(msg) {
+    let sentiment;
+    if (msg.sentScore < -2) {
+      sentiment = '-2';
+    } else if (msg.sentScore < -1) {
+      sentiment = '-1';
+    } else if (msg.sentScore < 1) {
+      sentiment = '0';
+    } else if (msg.sentScore < 2) {
+      sentiment = '1';
+    } else {
+      sentiment = '2';
+    }
     return `
-      <li data-me="${msg.user === user}">
+      <li data-sent="${sentiment}" data-me="${msg.user === user}">
         <div class="message">
           ${msg.message}
-          <footer>${msg.user}</footer></li>
+          <br>
+          Comparative: ${msg.sentComp}
+          <br>
+          Score: ${msg.sentScore}
+          <footer>${msg.user}</footer>
         </div>
       </li>
     `;

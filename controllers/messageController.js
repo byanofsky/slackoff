@@ -1,4 +1,5 @@
 const { Message } = require('./../models/index');
+const sentiment = require('sentiment');
 
 const messageController = {};
 
@@ -26,7 +27,14 @@ messageController.createMessage = (req, res) => {
 
 messageController.createMessageIO = (msgStr, io) => {
   const msg = JSON.parse(msgStr);
-  const messageInst = { user: msg.user, message: msg.message };
+  const sent = sentiment(msg.message);
+  console.dir(sent);
+  const messageInst = {
+    user: msg.user,
+    message: msg.message,
+    sentScore: sent.score,
+    sentComp: sent.comparative,
+  };
   console.log(`Message Received: ${msg}`);
   Message.create(messageInst, (err, result) => {
     if (err) return io.emit('exception', err);
